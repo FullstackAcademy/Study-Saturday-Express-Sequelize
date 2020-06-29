@@ -7,12 +7,12 @@ const Test = require('../db/models/test');
 const db = require('../db/db');
 const Promise = require('bluebird');
 
-describe('Models', function() {
-  before(function() {
+describe('Models', function () {
+  before(function () {
     return db.sync({ force: true });
   });
 
-  describe('The `Students` model', function() {
+  describe('The `Students` model', function () {
     //initial force sync to clear the db
 
     //create student BEFORE EACH test
@@ -21,7 +21,7 @@ describe('Models', function() {
     let lastName = 'Parker';
     let email = 'peterP@spidey.web';
 
-    beforeEach(function() {
+    beforeEach(function () {
       student = Student.build({
         firstName,
         lastName,
@@ -32,12 +32,12 @@ describe('Models', function() {
     //remove student AFTER EACH test
     //cascade:true `Only used in conjunction with TRUNCATE. Truncates all tables that have foreign-key references to the named table, or to any tables added to the group due to CASCADE`.
     //src: http://docs.sequelizejs.com/class/lib/model.js~Model.html#static-method-truncate
-    afterEach(function() {
+    afterEach(function () {
       return Student.truncate({ cascade: true });
     });
 
     describe('attributes definition', () => {
-      xit('includes `firstName`, `lastName`, and `email` fields', () => {
+      it('includes `firstName`, `lastName`, and `email` fields', () => {
         return student.save().then(savedStudent => {
           expect(savedStudent.firstName).to.equal('Peter');
           expect(savedStudent.lastName).to.equal('Parker');
@@ -45,7 +45,7 @@ describe('Models', function() {
         });
       });
 
-      xit('requires `firstName`', () => {
+      it('requires `firstName`', () => {
         student.firstName = null;
         return student.validate().then(
           () => {
@@ -55,7 +55,7 @@ describe('Models', function() {
         );
       });
 
-      xit('requires `lastName`', () => {
+      it('requires `lastName`', () => {
         student.lastName = null;
         return student.validate().then(
           () => {
@@ -65,7 +65,7 @@ describe('Models', function() {
         );
       });
 
-      xit('requires `email`', () => {
+      it('requires `email`', () => {
         student.email = null;
         return student.validate().then(
           () => {
@@ -75,7 +75,7 @@ describe('Models', function() {
         );
       });
 
-      xit('requires `email` to be in an email form', () => {
+      it('requires `email` to be in an email form', () => {
         student.email = 'hola world';
         return student.validate().then(
           () => {
@@ -102,7 +102,7 @@ describe('Models', function() {
         });
       });
 
-      xit('capitalizes the first letter of the first and last name before save to the DB', () => {
+      it('capitalizes the first letter of the first and last name before save to the DB', () => {
         return newStudent.save().then(savedStudent => {
           expect(savedStudent.firstName).to.equal('Charles');
           expect(savedStudent.lastName).to.equal('Xavier');
@@ -113,7 +113,7 @@ describe('Models', function() {
 
     //end of `The Students model` describe block
   });
-  describe('The `Test` model', function() {
+  describe('The `Test` model', function () {
     let test;
     let subject = 'Tree-climbing';
     let grade = 79;
@@ -133,14 +133,14 @@ describe('Models', function() {
     });
 
     describe('attributes definition', () => {
-      xit('includes `subject` and `grade` fields', () => {
+      it('includes `subject` and `grade` fields', () => {
         return test.save().then(savedTest => {
           expect(savedTest.subject).to.equal('Tree-climbing');
           expect(savedTest.grade).to.equal(79);
         });
       });
 
-      xit('requires `subject`', () => {
+      it('requires `subject`', () => {
         test.subject = null;
         return test.validate().then(
           () => {
@@ -150,7 +150,7 @@ describe('Models', function() {
         );
       });
 
-      xit('requires `grade`', () => {
+      it('requires `grade`', () => {
         test.grade = null;
         return test.validate().then(
           () => {
@@ -163,7 +163,7 @@ describe('Models', function() {
     });
 
     describe('associations', () => {
-      xit('belongs to a student', () => {
+      it('belongs to a student', () => {
         const newStudent = Student.create({
           firstName: 'Pepper',
           lastName: 'Potts',

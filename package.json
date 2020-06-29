@@ -10,17 +10,18 @@
   "author": "myself",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "morgan": "^1.9.0",
-    "nodemon": "^1.17.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.32.2"
+    "sequelize": "^6.2.3"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^5.0.0",
+    "mocha": "^8.0.1",
     "sinon": "^4.2.2",
     "sinon-chai": "^2.14.0",
     "supertest": "^3.0.0"

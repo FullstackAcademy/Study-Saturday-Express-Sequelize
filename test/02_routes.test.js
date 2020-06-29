@@ -53,7 +53,7 @@ describe('Routes', () => {
     });
 
     describe('GET /students', () => {
-      xit('retrieves all the students', () => {
+      it('retrieves all the students', () => {
         return agent
           .get('/students')
           .expect('Content-Type', /json/)
