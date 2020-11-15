@@ -36,57 +36,55 @@ describe('Models', function () {
     })
 
     describe('attributes definition', () => {
-      it('includes `firstName`, `lastName`, and `email` fields', () => {
-        return student.save().then((savedStudent) => {
-          expect(savedStudent.firstName).to.equal('Peter')
-          expect(savedStudent.lastName).to.equal('Parker')
-          expect(savedStudent.email).to.equal('peterP@spidey.web')
-        })
+      it('includes `firstName`, `lastName`, and `email` fields', async () => {
+        const savedStudent = await student.save()
+        expect(savedStudent.firstName).to.equal('Peter')
+        expect(savedStudent.lastName).to.equal('Parker')
+        expect(savedStudent.email).to.equal('peterP@spidey.web')
       })
 
-      it('requires `firstName`', () => {
-        student.firstName = null
-        return student.validate().then(
-          () => {
-            throw new Error('validation should fail when firstName is null')
-          },
-          (createdError) => expect(createdError).to.be.an.instanceOf(Error)
-        )
+      it('requires `firstName`', async () => {
+        try {
+          student.firstName = null
+          await student.validate()
+          throw new Error('validation should fail when firstName is null')
+        } catch (error) {
+          expect(error).to.be.an.instanceOf(Error)
+          expect(error.message).to.contain('notNull Violation')
+        }
       })
 
-      it('requires `lastName`', () => {
-        student.lastName = null
-        return student.validate().then(
-          () => {
-            throw new Error('validation should fail when lastName is null')
-          },
-          (createdError) => expect(createdError).to.be.an.instanceOf(Error)
-        )
+      it('requires `lastName`', async () => {
+        try {
+          student.lastName = null
+          await student.validate()
+          throw new Error('validation should fail when lastName is null')
+        } catch (error) {
+          expect(error).to.be.an.instanceOf(Error)
+          expect(error.message).to.contain('notNull Violation')
+        }
       })
 
-      it('requires `email`', () => {
-        student.email = null
-        return student.validate().then(
-          () => {
-            throw new Error('validation should fail when email is null')
-          },
-          (createdError) => expect(createdError).to.be.an.instanceOf(Error)
-        )
+      it('requires `email`', async () => {
+        try {
+          student.email = null
+          await student.validate()
+          throw new Error('validation should fail when email is null')
+        } catch (error) {
+          expect(error).to.be.an.instanceOf(Error)
+          expect(error.message).to.contain('notNull Violation')
+        }
       })
 
-      it('requires `email` to be in an email form', () => {
-        student.email = 'hola world'
-        return student.validate().then(
-          () => {
-            throw new Error(
-              'validation should fail when email is not in email form'
-            )
-          },
-          (createdError) => {
-            expect(createdError).to.be.an.instanceOf(Error)
-            expect(createdError.message).to.contain('Validation error')
-          }
-        )
+      it('requires `email` to be in an email form', async () => {
+        try {
+          student.email = 'hola world'
+          await student.validate()
+          throw new Error('validation should fail when email is not in email form')
+        } catch (error) {
+          expect(error).to.be.an.instanceOf(Error)
+          expect(error.message).to.contain('Validation error')
+        }
       })
       //end of `attributes definition` describe block
     })
@@ -101,11 +99,10 @@ describe('Models', function () {
         })
       })
 
-      it('capitalizes the first letter of the first and last name before save to the DB', () => {
-        return newStudent.save().then((savedStudent) => {
-          expect(savedStudent.firstName).to.equal('Charles')
-          expect(savedStudent.lastName).to.equal('Xavier')
-        })
+      it('capitalizes the first letter of the first and last name before save to the DB', async () => {
+        const savedStudent = await newStudent.save()
+        expect(savedStudent.firstName).to.equal('Charles')
+        expect(savedStudent.lastName).to.equal('Xavier')
       })
     })
     //end of `options definition` describe block
@@ -132,31 +129,32 @@ describe('Models', function () {
     })
 
     describe('attributes definition', () => {
-      it('includes `subject` and `grade` fields', () => {
-        return test.save().then((savedTest) => {
-          expect(savedTest.subject).to.equal('Tree-climbing')
-          expect(savedTest.grade).to.equal(79)
-        })
+      it('includes `subject` and `grade` fields', async () => {
+        const savedTest = await test.save()
+        expect(savedTest.subject).to.equal('Tree-climbing')
+        expect(savedTest.grade).to.equal(79)
       })
 
-      it('requires `subject`', () => {
-        test.subject = null
-        return test.validate().then(
-          () => {
-            throw new Error('validation should fail when subject is null')
-          },
-          (createdError) => expect(createdError).to.be.an.instanceOf(Error)
-        )
+      it('requires `subject`', async () => {
+        try {
+          test.subject = null
+          await test.validate()
+          throw new Error('validation should fail when subject is null')
+        } catch (error) {
+          expect(error).to.be.an.instanceOf(Error)
+          expect(error.message).to.contain('notNull Violation')
+        }
       })
 
-      it('requires `grade`', () => {
-        test.grade = null
-        return test.validate().then(
-          () => {
-            throw new Error('validation should fail when grade is null')
-          },
-          (createdError) => expect(createdError).to.be.an.instanceOf(Error)
-        )
+      it('requires `grade`', async () => {
+        try {
+          test.grade = null
+          await test.validate()
+          throw new Error('validation should fail when grade is null')
+        } catch (error) {
+          expect(error).to.be.an.instanceOf(Error)
+          expect(error.message).to.contain('notNull Violation')
+        }
       })
       //end of `attributes definition` describe block
     })
