@@ -11,7 +11,7 @@ describe('Models', function () {
     return db.sync({ force: true })
   })
 
-  describe('The `Students` model', function () {
+  describe.only('The `Students` model', function () {
     //initial force sync to clear the db
 
     //create student BEFORE EACH test
@@ -80,7 +80,9 @@ describe('Models', function () {
         try {
           student.email = 'hola world'
           await student.validate()
-          throw new Error('validation should fail when email is not in email form')
+          throw new Error(
+            'validation should fail when email is not in email form'
+          )
         } catch (error) {
           expect(error).to.be.an.instanceOf(Error)
           expect(error.message).to.contain('Validation error')
