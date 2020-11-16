@@ -26,8 +26,8 @@ describe('Routes', () => {
     let peter
     let charlie
 
-    beforeEach(() => {
-      const creatingStudents = [
+    beforeEach(async () => {
+      const studentData = [
         {
           firstName: 'Pepper',
           lastName: 'Potts',
@@ -43,12 +43,13 @@ describe('Routes', () => {
           lastName: 'Brown',
           email: 'cb@cbdb.com',
         },
-      ].map((data) => Student.create(data))
-      return Promise.all(creatingStudents).then((createdStudents) => {
-        pepper = createdStudents[0]
-        peter = createdStudents[1]
-        charlie = createdStudents[2]
-      })
+      ]
+      const createdStudents = await Promise.all(
+        studentData.map((data) => Student.create(data))
+      )
+      pepper = createdStudents[0]
+      peter = createdStudents[1]
+      charlie = createdStudents[2]
     })
 
     describe('GET /students', () => {
@@ -111,15 +112,10 @@ describe('Routes', () => {
     })
 
     describe('DELETE /students/:id', () => {
-      it('deletes an instance of a student', () => {
-        return agent
-          .delete(`/students/${charlie.id}`)
-          .expect(204)
-          .expect(() => {
-            return Student.findByPk(charlie.id).then((res) =>
-              expect(res).to.equal(null)
-            )
-          })
+      it('deletes an instance of a student', async () => {
+        await agent.delete(`/students/${charlie.id}`).expect(204)
+        const deletedStudent = await Student.findByPk(charlie.id)
+        expect(deletedStudent).to.equal(null)
       })
     })
   })
@@ -129,8 +125,8 @@ describe('Routes', () => {
     let badTest
     let hardTest
     let crayTest
-    beforeEach(() => {
-      const creatingTests = [
+    beforeEach(async () => {
+      const testData = [
         {
           subject: 'Tree-Climbing',
           grade: 81,
@@ -147,13 +143,14 @@ describe('Routes', () => {
           subject: 'Outdoor Wilderness Survival',
           grade: 66,
         },
-      ].map((data) => Test.create(data))
-      return Promise.all(creatingTests).then((createdTests) => {
-        funTest = createdTests[0]
-        badTest = createdTests[1]
-        hardTest = createdTests[2]
-        crayTest = createdTests[3]
-      })
+      ]
+      const createdTests = await Promise.all(
+        testData.map((data) => Test.create(data))
+      )
+      funTest = createdTests[0]
+      badTest = createdTests[1]
+      hardTest = createdTests[2]
+      crayTest = createdTests[3]
     })
     afterEach(() => {
       return Promise.all([
@@ -187,13 +184,11 @@ describe('Routes', () => {
 
     describe('POST /tests/student/:studentId', () => {
       let student
-      beforeEach(() => {
-        return Student.create({
+      beforeEach(async () => {
+        student = await Student.create({
           firstName: 'Pepper',
           lastName: 'Potts',
           email: 'saltn@pepper.com',
-        }).then((newStudent) => {
-          student = newStudent
         })
       })
       it('creates a new Test instance for a student', () => {
@@ -215,10 +210,9 @@ describe('Routes', () => {
         return agent
           .delete(`/tests/${crayTest.id}`)
           .expect(204)
-          .expect(() => {
-            return Test.findByPk(crayTest.id).then((res) => {
-              expect(res).to.equal(null)
-            })
+          .expect(async () => {
+            const deletedTest = await Test.findByPk(crayTest.id)
+            expect(deletedTest).to.equal(null)
           })
       })
     })
