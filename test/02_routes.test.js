@@ -21,7 +21,7 @@ describe('Routes', () => {
     ])
   })
 
-  describe('Student Routes', () => {
+  describe.only('Student Routes', () => {
     let pepper
     let peter
     let charlie
