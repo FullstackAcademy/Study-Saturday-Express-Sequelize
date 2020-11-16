@@ -31,7 +31,10 @@ Express and Sequelize Review
 
 		- Add Score
 
+### Instructions
 
+	- Open 01_model.test.js
+	- Lets create student model in db/models/student.js following test specs
 
 ### How to test routes with specs
 	- `npm t`
