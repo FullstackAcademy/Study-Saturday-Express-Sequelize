@@ -31,6 +31,13 @@ Express and Sequelize Review
 
 		- Add Score
 
+### Instructions
+	- Open 02_routes.test.js
+	- Time to create the following routes in routes/tests:
+		- get ‘/’
+		- get ‘/:id’
+		- post ‘/student/:studentId’
+		- delete ‘/:id’
 
 
 ### How to test routes with specs

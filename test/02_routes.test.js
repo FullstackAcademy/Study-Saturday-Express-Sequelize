@@ -120,7 +120,7 @@ describe('Routes', () => {
     })
   })
 
-  describe('Test Routes', () => {
+  describe.only('Test Routes', () => {
     let funTest
     let badTest
     let hardTest
