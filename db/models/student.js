@@ -7,16 +7,10 @@ const Student = db.define('student', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
-    // validate: {
-    //   is: /[\w]+/,
-    // },
   },
   lastName: {
     type: Sequelize.STRING,
     allowNull: false,
-    // validate: {
-    //   is: /[\w]+/,
-    // },
   },
   email: {
     type: Sequelize.STRING,
@@ -27,7 +21,7 @@ const Student = db.define('student', {
   },
 });
 
-Student.beforeCreate(student => {
+Student.beforeCreate((student) => {
   const nameFirst = student.firstName;
   const nameLast = student.lastName;
 
