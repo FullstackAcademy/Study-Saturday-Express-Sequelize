@@ -2,6 +2,9 @@
 
 Express and Sequelize Review
 
+## Lecture Slides: [Study-Saturday-Express-Sequelize](https://docs.google.com/presentation/d/1eTVsP1JMEmASD-qUfaFILHY9sNdNH7R_fFiHWylAQJo/edit?usp=sharing)
+
+
 ## Objective: Build a fully-functioning CRUD API for 2 models, Students and Tests. Test specs are provided to guide development.
 
 ### Details
